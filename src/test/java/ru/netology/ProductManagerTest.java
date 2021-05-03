@@ -15,7 +15,7 @@ public class ProductManagerTest {
     private Book book1 = new Book(1, "Идиот", 600, "Ф. М. Достоевский");
     private Book book2 = new Book(2, "Берег Утопии", 1100, "Т. Стоппард");
     private Book book3 = new Book(3, "Чума", 400, "А. Камю");
-    private Book book4 = new Book(4, "Портрет", 400, "Н. В. Гоголь");
+    private Book book4 = new Book(4, "Братья Карамазовы", 650, "Ф. М. Достоевский");
     private Smartphone smartphone1 = new Smartphone(5, "iPhone 7", 29000, "Apple");
     private Smartphone smartphone2 = new Smartphone(6, "Samsung Galaxy S21", 62000, "Samsung");
     private Smartphone smartphone3 = new Smartphone(7, "Huawei P40 Light", 20000, "Huawei");
@@ -38,9 +38,9 @@ public class ProductManagerTest {
         assertArrayEquals(expected, actual);
     }
     @Test
-    public void shouldSearchByAuthor() {
-        Product[] actual = manager.searchBy("Т. Стоппард");
-        Product[] expected = new Product[] {book2};
+    public void shouldSearchByAuthorMoreThatOne() {
+        Product[] actual = manager.searchBy("Ф. М. Достоевский");
+        Product[] expected = new Product[] {book1, book4};
         assertArrayEquals(expected, actual);
     }
     @Test
@@ -53,6 +53,13 @@ public class ProductManagerTest {
     public void shouldSearchBySmartphoneName() {
         Product[] actual = manager.searchBy("Huawei P40 Light");
         Product[] expected = new Product[] {smartphone3};
+        assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldSearchNonExistedProduct() {
+        Product[] actual = manager.searchBy("Н. В. Гоголь");
+        Product[] expected = new Product[0];
         assertArrayEquals(expected, actual);
     }
 }
